@@ -1,0 +1,16 @@
+==================
+Return statements
+==================
+
+def x() do
+    return 1
+end
+
+---
+
+(source_file
+ (function_definition
+  (identifier)
+  (parameter_list)
+  (block
+   (return_statement (number)))))
