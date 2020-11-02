@@ -1,3 +1,10 @@
+const PREC = {
+    COMMA: -1,
+    FUNCTION: 1
+};
+
+EQUALS_LEVELS = 5
+
 module.exports = grammar({
     name: 'elixir',
 
@@ -40,14 +47,39 @@ module.exports = grammar({
             // TODO: other kinds of expressions
         ),
 
-        identifier: _ => prec(2, /[a-z]+/),
+        identifier: _ => /[a-z]+/,
 
         number: _ => /\d+/,
 
         boolean: _ => choice("true", "false"),
 
-        // TODO(robin): Fix this string matcher. Right now it can only match
-        // one word
-        string: _ => prec(1, /[a-z]+/),
+        // TODO(robin): Fix this string matcher to exclude comments
+        string: _ => choice(
+            basic_string_style("'"),
+            basic_string_style('"'),
+            ...[...Array(EQUALS_LEVELS).keys()].map((level) => elixir_string_level(level))
+        ),
     }
 });
+
+function anything_but(tok) {
+  return new RegExp('[^' + tok + ']*');
+}
+
+function basic_string_style(tok) {
+  return seq(
+    tok,
+    anything_but(tok),
+    tok
+  );
+}
+
+function elixir_string_level(level) {
+  if (level >= 0) {
+    return token(seq(
+      ''.concat('[', '='.repeat(level), '['),
+      /.*/,
+      ''.concat(']', '='.repeat(level), ']'),
+    ));
+  }
+}

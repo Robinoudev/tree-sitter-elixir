@@ -43,11 +43,6 @@
     }
   },
   {
-    "type": "identifier",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "parameter_list",
     "named": true,
     "fields": {}
@@ -100,6 +95,14 @@
     "fields": {}
   },
   {
+    "type": "\"",
+    "named": false
+  },
+  {
+    "type": "'",
+    "named": false
+  },
+  {
     "type": "(",
     "named": false
   },
@@ -122,6 +125,10 @@
   {
     "type": "false",
     "named": false
+  },
+  {
+    "type": "identifier",
+    "named": true
   },
   {
     "type": "number",

@@ -54,7 +54,7 @@ Return string
 ==================
 
 def x() do
-    return "this is a string"
+    return '"""this is a string'
 end
 
 ---
