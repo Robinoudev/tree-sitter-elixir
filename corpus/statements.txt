@@ -1,5 +1,5 @@
 ==================
-Return statements
+Return Int
 ==================
 
 def x() do
@@ -14,3 +14,54 @@ end
   (parameter_list)
   (block
    (return_statement (number)))))
+
+==================
+Return true
+==================
+
+def x() do
+    return true
+end
+
+---
+
+(source_file
+ (function_definition
+  (identifier)
+  (parameter_list)
+  (block
+   (return_statement (boolean)))))
+
+==================
+Return false
+==================
+
+def x() do
+    return false
+end
+
+---
+
+(source_file
+ (function_definition
+  (identifier)
+  (parameter_list)
+  (block
+   (return_statement (boolean)))))
+
+==================
+Return string
+==================
+
+def x() do
+    return "this is a string"
+end
+
+---
+
+(source_file
+ (function_definition
+  (identifier)
+  (parameter_list)
+  (block
+   (return_statement (string)))))

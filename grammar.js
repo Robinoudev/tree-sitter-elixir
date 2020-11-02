@@ -12,7 +12,7 @@ module.exports = grammar({
             $.parameter_list,
             $.block
         ),
-        parameter_list: $ => seq(
+        parameter_list: _ => seq(
             '(',
                 // TODO: parameters
             ')'
@@ -34,12 +34,20 @@ module.exports = grammar({
 
         _expression: $ => choice(
             $.identifier,
-            $.number
+            $.number,
+            $.boolean,
+            $.string
             // TODO: other kinds of expressions
         ),
 
-        identifier: $ => /[a-z]+/,
+        identifier: _ => prec(2, /[a-z]+/),
 
-        number: $ => /\d+/
+        number: _ => /\d+/,
+
+        boolean: _ => choice("true", "false"),
+
+        // TODO(robin): Fix this string matcher. Right now it can only match
+        // one word
+        string: _ => prec(1, /[a-z]+/),
     }
 });
